@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- package com.google.firebase.example.fireeats.adapter;
+ package com.google.firebase.example.Lab6a_A189289.adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
 

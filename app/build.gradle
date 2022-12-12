@@ -6,7 +6,7 @@ plugins {
 android {
     compileSdkVersion 33
     defaultConfig {
-        applicationId 'com.google.firebase.example.fireeats'
+        applicationId 'com.google.firebase.example.Lab6a_A189289'
         minSdkVersion 19
         targetSdkVersion 33
         versionCode 1
@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
     // Firestore
     implementation 'com.google.firebase:firebase-firestore:24.3.1'
 

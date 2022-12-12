@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- package com.google.firebase.example.fireeats;
+ package com.google.firebase.example.Lab6a_A189289;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -35,11 +35,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.example.fireeats.adapter.RatingAdapter;
-import com.google.firebase.example.fireeats.model.Rating;
-import com.google.firebase.example.fireeats.model.Restaurant;
-import com.google.firebase.example.fireeats.util.FirebaseUtil;
-import com.google.firebase.example.fireeats.util.RestaurantUtil;
+import com.google.firebase.example.Lab6a_A189289.adapter.RatingAdapter;
+import com.google.firebase.example.Lab6a_A189289.model.Rating;
+import com.google.firebase.example.Lab6a_A189289.model.Restaurant;
+import com.google.firebase.example.Lab6a_A189289.util.FirebaseUtil;
+import com.google.firebase.example.Lab6a_A189289.util.RestaurantUtil;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.firebase.example.fireeats.util;
+package com.google.firebase.example.Lab6a_A189289.util;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.example.fireeats.BuildConfig;
+import com.google.firebase.example.Lab6a_A189289.BuildConfig;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 /**

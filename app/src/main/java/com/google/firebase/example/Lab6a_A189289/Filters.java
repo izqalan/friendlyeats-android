@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- package com.google.firebase.example.fireeats;
+ package com.google.firebase.example.Lab6a_A189289;
 
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.google.firebase.example.fireeats.model.Restaurant;
-import com.google.firebase.example.fireeats.util.RestaurantUtil;
+import com.google.firebase.example.Lab6a_A189289.model.Restaurant;
+import com.google.firebase.example.Lab6a_A189289.util.RestaurantUtil;
 import com.google.firebase.firestore.Query;
 
 /**

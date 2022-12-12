@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.firebase.example.fireeats">
+    package="com.google.firebase.example.Lab6a_A189289">
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.google.firebase.example.Lab6a_A189289.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RestaurantDetailActivity" />
+        <activity android:name="com.google.firebase.example.Lab6a_A189289.RestaurantDetailActivity" />
     </application>
 
 </manifest>

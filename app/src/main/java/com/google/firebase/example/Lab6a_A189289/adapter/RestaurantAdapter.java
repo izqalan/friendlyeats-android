@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- package com.google.firebase.example.fireeats.adapter;
+ package com.google.firebase.example.Lab6a_A189289.adapter;
 
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -26,9 +26,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.example.fireeats.R;
-import com.google.firebase.example.fireeats.model.Restaurant;
-import com.google.firebase.example.fireeats.util.RestaurantUtil;
+import com.google.firebase.example.Lab6a_A189289.R;
+import com.google.firebase.example.Lab6a_A189289.model.Restaurant;
+import com.google.firebase.example.Lab6a_A189289.util.RestaurantUtil;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 
