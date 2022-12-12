@@ -31,11 +31,13 @@ public class Rating {
     private String userName;
     private double rating;
     private String text;
+    private String quality;
+    private boolean isAccessible;
     private @ServerTimestamp Date timestamp;
 
     public Rating() {}
 
-    public Rating(FirebaseUser user, double rating, String text) {
+    public Rating(FirebaseUser user, double rating, String text, String quality, boolean isAccessible) {
         this.userId = user.getUid();
         this.userName = user.getDisplayName();
         if (TextUtils.isEmpty(this.userName)) {
@@ -44,6 +46,8 @@ public class Rating {
 
         this.rating = rating;
         this.text = text;
+        this.quality = quality;
+        this.isAccessible = isAccessible;
     }
 
     public String getUserId() {
@@ -84,5 +88,21 @@ public class Rating {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getQuality() {
+        return quality;
+    }
+
+    public void setQuality(String quality) {
+        this.quality = quality;
+    }
+
+    public boolean isAccessible() {
+        return isAccessible;
+    }
+
+    public void setAccessible(boolean accessible) {
+        isAccessible = accessible;
     }
 }

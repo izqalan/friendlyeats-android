@@ -21,6 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +42,10 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
 
     private MaterialRatingBar mRatingBar;
     private EditText mRatingText;
+    private EditText mQualityText;
+    private RadioGroup accessRadioGroup;
+    private RadioButton radioButton;
+    private boolean isAccessible;
 
     interface RatingListener {
 
@@ -57,11 +63,25 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
         View v = inflater.inflate(R.layout.dialog_rating, container, false);
         mRatingBar = v.findViewById(R.id.restaurant_form_rating);
         mRatingText = v.findViewById(R.id.restaurant_form_text);
+        accessRadioGroup = v.findViewById(R.id.access_radio_group);
+        mQualityText = v.findViewById(R.id.foodquality_form_text);
 
         v.findViewById(R.id.restaurant_form_button).setOnClickListener(this);
         v.findViewById(R.id.restaurant_form_cancel).setOnClickListener(this);
 
         return v;
+    }
+
+    public void checkButton(View v){
+        int radioId = accessRadioGroup.getCheckedRadioButtonId();
+        radioButton = v.findViewById(radioId);
+        switch (radioButton.getText().toString()){
+            case "Yes":
+                isAccessible = true;
+                break;
+            case "No":
+                isAccessible = false;
+        }
     }
 
     @Override
@@ -98,7 +118,9 @@ public class RatingDialogFragment extends DialogFragment implements View.OnClick
         Rating rating = new Rating(
                 FirebaseUtil.getAuth().getCurrentUser(),
                 mRatingBar.getRating(),
-                mRatingText.getText().toString());
+                mRatingText.getText().toString(),
+                mQualityText.getText().toString(),
+                isAccessible);
 
         if (mRatingListener != null) {
             mRatingListener.onRating(rating);
