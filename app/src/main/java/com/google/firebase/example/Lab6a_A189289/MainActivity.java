@@ -34,9 +34,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.example.Lab6a_A189289.adapter.FirestoreAdapter;
 import com.google.firebase.example.Lab6a_A189289.adapter.RestaurantAdapter;
+import com.google.firebase.example.Lab6a_A189289.model.Restaurant;
 import com.google.firebase.example.Lab6a_A189289.util.FirebaseUtil;
+import com.google.firebase.example.Lab6a_A189289.util.RestaurantUtil;
 import com.google.firebase.example.Lab6a_A189289.viewmodel.MainActivityViewModel;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -93,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements
 
         // Initialize Firestore and the main RecyclerView
         mFirestore = FirebaseUtil.getFirestore();
+        mQuery = mFirestore.collection("restaurants")
+                .orderBy("avgRating", Query.Direction.DESCENDING)
+                .limit(LIMIT);
+
         initRecyclerView();
 
         // Filter Dialog
@@ -159,13 +167,45 @@ public class MainActivity extends AppCompatActivity implements
 
     private void onAddItemsClicked() {
         // TODO(developer): Add random restaurants
-        showTodoToast();
+        CollectionReference restaurantsRef = mFirestore.collection("restaurants");
+        for (int i = 0; i < 10; i++) {
+            // Create random restaurant / ratings
+            Restaurant randomRestaurant = RestaurantUtil.getRandom(this);
+
+            // Add restaurant
+            restaurantsRef.add(randomRestaurant);
+        }
+
     }
 
     @Override
     public void onFilter(Filters filters) {
         // TODO(developer): Construct new query
-        showTodoToast();
+        Query query = mFirestore.collection("restaurants");
+
+        if(filters.hasCategory()){
+            query = query.whereEqualTo(Restaurant.FIELD_CATEGORY, filters.getCategory());
+        }
+        // City (equality filter)
+        if (filters.hasCity()) {
+            query = query.whereEqualTo(Restaurant.FIELD_CITY, filters.getCity());
+        }
+
+        // Price (equality filter)
+        if (filters.hasPrice()) {
+            query = query.whereEqualTo(Restaurant.FIELD_PRICE, filters.getPrice());
+        }
+
+        // Sort by (orderBy with direction)
+        if (filters.hasSortBy()) {
+            query = query.orderBy(filters.getSortBy(), filters.getSortDirection());
+        }
+
+        // Limit items
+        query = query.limit(LIMIT);
+
+        // Update the query
+        mAdapter.setQuery(query);
 
         // Set header
         mCurrentSearchView.setText(Html.fromHtml(filters.getSearchDescription(this)));

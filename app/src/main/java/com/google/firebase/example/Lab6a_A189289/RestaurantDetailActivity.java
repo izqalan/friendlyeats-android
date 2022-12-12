@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,7 @@ import com.google.firebase.example.Lab6a_A189289.model.Rating;
 import com.google.firebase.example.Lab6a_A189289.model.Restaurant;
 import com.google.firebase.example.Lab6a_A189289.util.FirebaseUtil;
 import com.google.firebase.example.Lab6a_A189289.util.RestaurantUtil;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -47,6 +49,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.Transaction;
 
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
@@ -167,7 +170,27 @@ public class RestaurantDetailActivity extends AppCompatActivity implements
 
     private Task<Void> addRating(final DocumentReference restaurantRef, final Rating rating) {
         // TODO(developer): Implement
-        return Tasks.forException(new Exception("not yet implemented"));
+        DocumentReference ratingRef = restaurantRef.collection("ratings").document();
+        return mFirestore.runTransaction(new Transaction.Function<Void>() {
+            @Nullable
+            @Override
+            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                Restaurant restaurant = transaction.get(restaurantRef).toObject(Restaurant.class);
+
+                int newNumRatings = restaurant.getNumRatings() + 1;
+
+                double oldRatingTotal = restaurant.getAvgRating() * restaurant.getNumRatings();
+                double newAvgRating = (oldRatingTotal + rating.getRating()) / newNumRatings;
+
+                restaurant.setNumRatings(newNumRatings);
+                restaurant.setAvgRating(newAvgRating);
+
+                transaction.set(restaurantRef, restaurant);
+                transaction.set(ratingRef, rating);
+
+                return null;
+            }
+        });
     }
 
     /**
