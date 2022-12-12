@@ -55,18 +55,28 @@ public class RatingAdapter extends FirestoreAdapter<RatingAdapter.ViewHolder> {
         TextView nameView;
         MaterialRatingBar ratingBar;
         TextView textView;
+        TextView qualityView;
+        TextView accessView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.rating_item_name);
             ratingBar = itemView.findViewById(R.id.rating_item_rating);
             textView = itemView.findViewById(R.id.rating_item_text);
+            qualityView = itemView.findViewById(R.id.quality_item_text);
+            accessView = itemView.findViewById(R.id.access_item_text);
         }
 
         public void bind(Rating rating) {
             nameView.setText(rating.getUserName());
             ratingBar.setRating((float) rating.getRating());
             textView.setText(rating.getText());
+            qualityView.setText(rating.getQuality());
+            if(rating.isAccessible()){
+                accessView.setText("Yes");
+            } else if (!rating.isAccessible()) {
+                accessView.setText("No");
+            }
         }
     }
 
